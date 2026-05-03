@@ -4,11 +4,13 @@ import { Todo } from "./Todo.js";
 export const UI = {
 
     currentProjectId: null,
+    currentTodoId: null,
 
     init() {
         document.getElementById("add-todo-btn").addEventListener("click", () => {
             if(UI.currentProjectId) {
-                UI.openModal(UI.currentProjectId);
+                UI.currentTodoId = null;
+                UI.openModal();
             }
         });
 
@@ -16,7 +18,11 @@ export const UI = {
 
         document.getElementById("todo-form").addEventListener("submit", (e) => {
             e.preventDefault();
-            UI.handleAddTodo(UI.currentProjectId);
+            if(UI.currentTodoId) {
+                UI.handleEditTodo(UI.currentProjectId, UI.currentTodoId);
+            } else {
+                UI.handleAddTodo(UI.currentProjectId);
+            }
         });
 
         document.getElementById("add-project-btn").addEventListener("click", () => {
@@ -44,6 +50,20 @@ export const UI = {
         UI.renderTodos(projectId);
     },
 
+    handleEditTodo(projectId, todoId) {
+        const updatedData = {
+            title: document.getElementById("todo-title").value,
+            description: document.getElementById("todo-description").value,
+            dueDate: document.getElementById("todo-due-date").value,
+            priority: document.getElementById("todo-priority").value,
+            notes: document.getElementById("todo-notes").value,
+        };
+
+        App.updateTodo(projectId, todoId, updatedData);
+        UI.closeModal();
+        UI.renderTodos(projectId);
+    },
+
     renderProjects() {
         const projectList = document.getElementById("project-list");
         projectList.innerHTML = "";
@@ -66,7 +86,7 @@ export const UI = {
                     alert("You need atleast one project!");
                     return;
                 }
-                
+
                 App.removeProject(project.id);
 
                 if (UI.currentProjectId == project.id) {
@@ -111,17 +131,36 @@ export const UI = {
             li.appendChild(date);
             li.appendChild(deleteBtn);
             todoList.appendChild(li);
+
+            li.addEventListener("click", () => {
+                UI.currentTodoId = todo.id;
+                UI.openModal(todo);
+            })
         })
     },
 
-    openModal() {
+    openModal(todo = null) {
         const overlay = document.getElementById("modal-overlay");
+        const modalTitle = document.getElementById("modal-title");
         overlay.classList.add("active");
+
+        if(todo) {
+            modalTitle.textContent = "Edit Todo";
+            document.getElementById("todo-title").value = todo.title;
+            document.getElementById("todo-description").value = todo.description;
+            document.getElementById("todo-due-date").value = todo.dueDate;
+            document.getElementById("todo-priority").value = todo.priority;
+            document.getElementById("todo-notes").value = todo.notes;
+        } else {
+            modalTitle.textContent = "Add Todo";
+            document.getElementById("todo-form").reset();
+        }
     },
 
     closeModal() {
         const overlay = document.getElementById("modal-overlay");
         overlay.classList.remove("active");
         document.getElementById("todo-form").reset();
+        UI.currentTodoId = null;
     }
 }

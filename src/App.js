@@ -35,5 +35,12 @@ export const App = {
         const project = this.getProject(projectId);
         project.removeTodo(todoId);
         Storage.saveProjects(this.projects);
+    },
+
+    updateTodo(projectId, todoId, updatedData) {
+        const project = this.getProject(projectId);
+        const todo = project.todos.find(todo => todo.id == todoId);
+        Object.assign(todo, updatedData);
+        Storage.saveProjects(this.projects);
     }
 }
