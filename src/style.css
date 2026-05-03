@@ -33,3 +33,15 @@
     gap: 1rem;
     justify-content: flex-end;
 }
+
+.priority-low {
+    border-left: 4px solid green;
+}
+
+.priority-medium {
+    border-left: 4px solid orange;
+}
+
+.priority-high {
+    border-left: 4px solid red;
+}

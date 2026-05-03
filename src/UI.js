@@ -113,6 +113,7 @@ export const UI = {
         project.todos.forEach(todo => {
             const li = document.createElement("li");
             li.dataset.id = todo.id;
+            li.classList.add(`priority-${todo.priority}`);
 
             const title = document.createElement("span");
             title.textContent = todo.title;
