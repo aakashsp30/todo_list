@@ -56,6 +56,28 @@ export const UI = {
                 UI.currentProjectId = project.id;
                 UI.renderTodos(project.id);
             });
+
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
+
+                if(App.projects.length == 1) {
+                    alert("You need atleast one project!");
+                    return;
+                }
+                
+                App.removeProject(project.id);
+
+                if (UI.currentProjectId == project.id) {
+                    UI.currentProjectId = null;
+                    document.getElementById("project-title").textContent = "Select a Project";
+                    document.getElementById("todo-list").innerHTML = "";
+                }
+                UI.renderProjects();
+            });
+
+            li.appendChild(deleteBtn);  
             projectList.appendChild(li);
         });
     },
