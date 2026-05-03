@@ -1,0 +1,35 @@
+#modal-overlay {
+    display: none;
+}
+
+#modal-overlay.active {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#modal {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#modal input, #modal textarea, #modal select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#modal-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
