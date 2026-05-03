@@ -18,6 +18,14 @@ export const UI = {
             e.preventDefault();
             UI.handleAddTodo(UI.currentProjectId);
         });
+
+        document.getElementById("add-project-btn").addEventListener("click", () => {
+            const name = prompt("Enter project name:");
+            if (name) {
+                App.addProject(name);
+                UI.renderProjects();
+            }
+        })
     },
 
     handleAddTodo(projectId) {
