@@ -70,8 +70,16 @@ export const UI = {
             const date = document.createElement("span");
             date.textContent = todo.dueDate;
 
+            const deleteBtn = document.createElement("button");
+            deleteBtn.textContent = "Delete";
+            deleteBtn.addEventListener("click", () => {
+                App.removeTodo(projectId, todo.id);
+                UI.renderTodos(projectId);
+            })
+
             li.appendChild(title);
             li.appendChild(date);
+            li.appendChild(deleteBtn);
             todoList.appendChild(li);
         })
     },
