@@ -123,7 +123,8 @@ export const UI = {
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
-            deleteBtn.addEventListener("click", () => {
+            deleteBtn.addEventListener("click", (e) => {
+                e.stopPropagation();
                 App.removeTodo(projectId, todo.id);
                 UI.renderTodos(projectId);
             })
