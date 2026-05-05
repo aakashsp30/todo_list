@@ -1,5 +1,6 @@
 import { App } from "./App.js";
 import { Todo } from "./Todo.js";
+import { formatDistanceToNow, parseISO } from "date-fns";
 
 export const UI = {
 
@@ -126,7 +127,7 @@ export const UI = {
             title.textContent = todo.title;
 
             const date = document.createElement("span");
-            date.textContent = todo.dueDate;
+            date.textContent = formatDistanceToNow(parseISO(todo.dueDate), {addSuffix: true});
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
