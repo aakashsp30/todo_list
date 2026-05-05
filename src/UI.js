@@ -72,13 +72,20 @@ export const UI = {
             const li = document.createElement("li");
             li.textContent = project.name;
             li.dataset.id = project.id;
+
+            if(project.id === UI.currentProjectId) {
+                li.classList.add("active");
+            }
+
             li.addEventListener("click", () => {
                 UI.currentProjectId = project.id;
                 UI.renderTodos(project.id);
+                UI.renderProjects();
             });
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("delete-btn")
             deleteBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
 
@@ -123,6 +130,7 @@ export const UI = {
 
             const deleteBtn = document.createElement("button");
             deleteBtn.textContent = "Delete";
+            deleteBtn.classList.add("delete-btn")
             deleteBtn.addEventListener("click", (e) => {
                 e.stopPropagation();
                 App.removeTodo(projectId, todo.id);
