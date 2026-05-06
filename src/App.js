@@ -42,5 +42,12 @@ export const App = {
         const todo = project.todos.find(todo => todo.id == todoId);
         Object.assign(todo, updatedData);
         Storage.saveProjects(this.projects);
+    },
+
+    toggleTodo(projectId, todoId) {
+        const project = this.getProject(projectId);
+        const todo = project.todos.find(t=>t.id == todoId);
+        todo.toggleCompleted();
+        Storage.saveProjects(this.projects);
     }
 }

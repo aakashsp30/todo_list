@@ -148,6 +148,11 @@ body {
     border-left: 4px solid red;
 }
 
+#todo-list li.completed span {
+    text-decoration: line-through;
+    color: #bbb;
+}
+
 .delete-btn {
     background: none;
     border: none;

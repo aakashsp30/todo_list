@@ -123,6 +123,15 @@ export const UI = {
             li.dataset.id = todo.id;
             li.classList.add(`priority-${todo.priority}`);
 
+            const checkbox = document.createElement("input");
+            checkbox.type = "checkbox";
+            checkbox.checked = todo.completed;
+            checkbox.addEventListener("click", (e) => {
+                e.stopPropagation();
+                App.toggleTodo(projectId, todo.id);
+                UI.renderTodos(projectId);
+            })
+
             const title = document.createElement("span");
             title.textContent = todo.title;
 
@@ -138,6 +147,7 @@ export const UI = {
                 UI.renderTodos(projectId);
             })
 
+            li.appendChild(checkbox);
             li.appendChild(title);
             li.appendChild(date);
             li.appendChild(deleteBtn);
@@ -147,6 +157,10 @@ export const UI = {
                 UI.currentTodoId = todo.id;
                 UI.openModal(todo);
             })
+
+            if(todo.completed) {
+                li.classList.add("completed");
+            }
         })
     },
 
