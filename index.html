@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+<script defer src="main.js"></script></head>
+<body>
+    <div id="app">
+
+        <aside id="sidebar">
+            <h2>Projects</h2>
+            <ul id="project-list">
+
+            </ul>
+            <button id="add-project-btn">+ New Project</button>
+        </aside>
+
+        <main id="content">
+            <h2 id="project-title">Select a Project</h2>
+            <ul id="todo-list">
+
+            </ul>
+            <button id="add-todo-btn">+ Add Todo</button>
+        </main>
+    </div>
+
+    <div id="modal-overlay">
+        <div id="modal">
+            <h3 id="modal-title">Add Todo</h3>
+            <form id="todo-form">
+                <input type="text" id="todo-title" placeholder="Title" required>
+                <textarea id="todo-description" placeholder="Description"></textarea>
+                <input type="date" id="todo-due-date" required>
+                <select id="todo-priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                </select>
+                <textarea id="todo-notes" placeholder="Notes"></textarea>
+                <div id="modal-buttons">
+                    <button type="submit">Add Todo</button>
+                    <button type="button" id="close-modal-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
